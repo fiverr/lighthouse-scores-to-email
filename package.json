@@ -1,0 +1,25 @@
+{
+  "name": "lighthouse-scores-to-email",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiverr/lighthouse-scores-to-email.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fiverr/lighthouse-scores-to-email/issues"
+  },
+  "homepage": "https://github.com/fiverr/lighthouse-scores-to-email#readme",
+  "dependencies": {
+    "handlebars-helpers": "^0.10.0",
+    "node-fetch": "^2.6.0",
+    "nodemailer": "^6.4.2",
+    "nodemailer-express-handlebars": "^3.1.0"
+  }
+}

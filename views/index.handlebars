@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <table style="width: 100%; text-align: center;">
+          <tr>
+            <td colspan="5"><h1 style="color: #4A73E8;">LightHouse Report - {{date}}</h1></td>
+          </tr>
+          {{#each dataFromApi}}
+            <tr>
+              <td colspan="5" style="font-size: 1.5em; color: #404145;">{{pageName}} - {{strategy}}</td>
+            </tr>
+            <tr>
+              {{#details}}
+                <td valign="top" style="padding: 10px 10px 20px 10px; font-size: 1em;">
+                  <div style="background: #fff; border-radius: 50%; width: 4em; height: 4em; line-height: 4em; margin: 0 auto 10px auto; border: 0.25em {{getScoreColor score}} solid;">
+                    <b style="font-size: 24px; color: {{getScoreColor score}};">{{score}}</b>
+                  </div>
+                  {{name}}
+                </td>
+              {{/details}}
+            </tr>
+          {{/each}}
+        </table>
+    </body>
+</html>
