@@ -1,27 +1,11 @@
-var mailer = require('./lib/mailer');
-var lightHouseApi = require('./lib/lightHouseApi');
-
-var conf = {
-    strategy: ['mobile', 'desktop'],
-    pages: [
-        {"Category Page" : 'https://www.fiverr.com/categories/graphics-design/creative-logo-design',},
-        {"Gig Page": 'https://www.fiverr.com/aishar/record-a-female-voice-over-in-an-american-accent'}
-    ]
-};
-
-// var conf = {
-//     strategy: ['desktop'],
-//     pages: [
-//         {categoryPage: 'https://www.fiverr.com/categories/graphics-design/creative-logo-design',}
-//     ]
-// };
-
-var categories = ['performance','seo','accessibility','pwa', 'best-practices']
+const mailer = require('./lib/mailer');
+const lightHouseApi = require('./lib/lightHouseApi');
+const config = require('./configuration/config.js');
+const categories = config.categories
 
 function getCombinations(options, optionIndex, results, current) {
     var allKeys = Object.keys(options);
     var optionKey = allKeys[optionIndex];
-
     var vals = options[optionKey];
 
     for (var i = 0; i < vals.length; i++) {
@@ -38,28 +22,40 @@ function getCombinations(options, optionIndex, results, current) {
     return results;
 }
 
-var PagesCombinations = getCombinations(conf, 0, [], {});
+const strategies = config.strategy
+const conf = { strategies: strategies, pages: config.pages }
 
-const callApi = async (categories, pagesCombinations ) => {  
+const PagesCombinations = getCombinations(conf, 0, [], {});
+
+const callApi = async (categories, pagesCombinations ) => {
 
     const dataFromApi = []
+
+    for (i=0;i < strategies.length;i++)
+    {
+        dataFromApi.push(new Array());
+    }
+
+
     for (let index = 0; index < pagesCombinations.length; index++) {
         const pageUrl = Object.values(pagesCombinations[index].pages)[0]
-        const strategy = pagesCombinations[index].strategy
+        const strategy = pagesCombinations[index].strategies
         const pageName = Object.keys(pagesCombinations[index].pages)[0]
         const resultFromApi = await lightHouseApi.queryApi(pageUrl,strategy,categories,pageName)
-        dataFromApi.push(resultFromApi)
+            
+        currectLocation = strategies.findIndex((element) => element == strategy);
+        dataFromApi[currectLocation].push(resultFromApi)    
     }     
+   
     return dataFromApi
 }
 
-
-
-
 const runNow = async() => {
-    const getApiDate = await callApi(categories,PagesCombinations)
-    await mailer.sendEmail(getApiDate)
+    const getApiData = await callApi(categories,PagesCombinations)
+    await mailer.sendEmail(getApiData)
 }
 
 
 runNow()
+
+
