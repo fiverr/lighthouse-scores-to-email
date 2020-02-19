@@ -14,7 +14,7 @@ const config = {
                         authUser: process.env.AUTH_USER || "",
                         authPassword: process.env.AUTH_PASSWORD || ""
                     },
-                    apiKey:  process.env.APIKEY || ""
+                    lightHouseApiKey:  process.env.APIKEY || ""
 
                 }
 
