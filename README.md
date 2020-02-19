@@ -1,5 +1,9 @@
 # lighthouse-scores-to-email
 
+## Configurations
+
+Add the pages and email configurations to /configurations/config.js 
+
 ## getting-started with Docker 
 
 `docker build -t lighthouse:0.1 .` 
