@@ -2,7 +2,7 @@
 
 ## Configurations
 
-Add the pages and email configurations to /configurations/config.js 
+Add the pages and email configurations to `/configurations/config.js` 
 
 ## getting-started with Docker 
 
