@@ -13,18 +13,23 @@
           </tr>
           {{#each dataFromApi}}
             <tr>
-              <td colspan="5" style="font-size: 1.5em; color: #404145;">{{pageName}} - {{strategy}}</td>
+              <td colspan="5" style="border-bottom:1px solid red;color:red; width:100%"> </td>
             </tr>
-            <tr>
-              {{#details}}
-                <td valign="top" style="padding: 10px 10px 20px 10px; font-size: 1em;">
-                  <div style="background: #fff; border-radius: 50%; width: 4em; height: 4em; line-height: 4em; margin: 0 auto 10px auto; border: 0.25em {{getScoreColor score}} solid;">
-                    <b style="font-size: 24px; color: {{getScoreColor score}};">{{score}}</b>
-                  </div>
-                  {{name}}
-                </td>
-              {{/details}}
-            </tr>
+           {{#each this}}
+              <tr>
+                <td colspan="5" style="font-size: 1.5em; color: #404145;">{{pageName}} - {{strategy}}</td>
+              </tr>
+              <tr>
+                {{#details}}
+                  <td valign="top" style="padding: 10px 10px 20px 10px; font-size: 1em;">
+                    <div style="background: #fff; border-radius: 50%; width: 4em; height: 4em; line-height: 4em; margin: 0 auto 10px auto; border: 0.25em {{getScoreColor score}} solid;">
+                      <b style="font-size: 24px; color: {{getScoreColor score}};">{{score}}</b>
+                    </div>
+                    {{name}}
+                  </td>
+                {{/details}}
+              </tr>
+            {{/each}}         
           {{/each}}
         </table>
     </body>
