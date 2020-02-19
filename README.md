@@ -1,6 +1,6 @@
 # lighthouse-scores-to-email
 
-##getting-started with Docker 
+## getting-started with Docker 
 
 `docker build -t lighthouse:0.1 .` 
 
