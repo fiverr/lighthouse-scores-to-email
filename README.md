@@ -2,7 +2,11 @@
 
 ## Configurations
 
-Add the pages and email configurations to `/configurations/config.js` 
+Add email and general configurations to `/configuration/config.js`
+Add pages configurations to `/configuration/pages.json`
+
+To load configurations during run time from external file, use docker volume.
+`-v "$(pwd)"/stam.json:/usr/src/app/configuration/pages.json`
 
 ## getting-started with Docker 
 
