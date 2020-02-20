@@ -1,0 +1,29 @@
+defaults: &defaults
+  working_directory: ~/app
+  docker:
+    - image: fiverr/circleci_node_12:latest
+      auth:
+        username: $DOCKER_USER
+        password: $DOCKER_PASS
+
+version: 2
+jobs:
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm i
+      - run:
+          name: Test
+          command: npm t
+      - run:
+          name: Code lint
+          command: npm run lint
+
+workflows:
+  version: 2
+  ci-cd:
+    jobs:
+      - test
