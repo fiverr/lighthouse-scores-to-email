@@ -1,6 +1,9 @@
 const mailer = require('./lib/mailer');
 const lightHouseApi = require('./lib/lightHouseApi');
 const config = require('./configuration/config.js');
+const fs = require("fs");
+
+
 
 const categories = config.categories;
 
@@ -24,7 +27,10 @@ function getCombinations(options, optionIndex, results, current) {
 }
 
 const strategies = config.strategy;
-const conf = { strategies, pages: config.pages };
+const pages = fs.readFileSync('./configuration/pages.json')
+const pagesContent = JSON.parse(pages);
+
+const conf = { strategies, pages: pagesContent };
 
 const PagesCombinations = getCombinations(conf, 0, [], {});
 
@@ -55,6 +61,7 @@ const runNow = async() => {
     const getApiData = await callApi(categories, PagesCombinations);
     await mailer.sendEmail(getApiData);
 };
+
 
 
 runNow();

@@ -1,9 +1,6 @@
 const config = {
     categories : ['performance', 'seo', 'accessibility', 'best-practices'],
     strategy: ['mobile', 'desktop'],
-    pages: [
-        {'Search Page' : 'https://www.google.com'}
-    ],
     email : {
         from : process.env.EMAIL_FROM || 'Fred Foo 👻 ',
         to : process.env.EMAIL_TO || '',
