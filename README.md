@@ -27,3 +27,17 @@ Read bout Google's [app passwords](https://support.google.com/accounts/answer/18
 
 | ![](https://user-images.githubusercontent.com/516342/74944673-0c848a00-53ff-11ea-888c-457f16bdb1b9.png)
 | -
+
+## Set up environment variables
+
+| Variable | Value | Example | Default
+| - | - | - | -
+| `APIKEY` | SpeedTest [API Key](https://developers.google.com/speed/docs/insights/v4/first-app) | __Mandatory__
+| `AUTH_USER` | Email username | __Mandatory__
+| `AUTH_PASSWORD` | [App password](https://support.google.com/accounts/answer/185833) | __Mandatory__
+| `EMAIL_TO` | Recipient Email address | __Mandatory__
+| `EMAIL_FROM` | Sender | `Fred Foo 👻 `
+| `EMAIL_SUBJECT` | Subject of the email | `Google LightHouse Report ✔`
+| `HOST` | SMTP host | `smtp.gmail.com`
+| `PORT` | SMTP port | `465`
+| `SECURE` | Should use SSL | `true`
