@@ -1,45 +1,39 @@
 const { join } = require('path');
-const mailer = require('./lib/mailer');
-const lightHouseApi = require('./lib/lightHouseApi');
+const pMap = require('p-map');
 const getCombinations = require('./lib/getCombinations');
+const lightHouseApi = require('./lib/lightHouseApi');
+const logger = require('./lib/logger');
+const sendEmail = require('./lib/sendEmail');
 const {
     categories,
-    strategy: strategies
+    email,
+    lightHouseApiKey,
+    strategies
 } = require('./configuration/config.js');
-
-const pages = require(join(process.cwd(), 'configuration/pages.json'));
-
-const PagesCombinations = getCombinations({ strategies, pages }, 0, [], {});
-
-const callApi = async(categories, pagesCombinations) => {
-
-    const dataFromApi = [];
-
-    for (let i = 0; i < strategies.length; i++)
-    {
-        dataFromApi.push(new Array());
-    }
-
-
-    for (let index = 0; index < pagesCombinations.length; index++) {
-        const pageUrl = Object.values(pagesCombinations[index].pages)[0];
-        const strategy = pagesCombinations[index].strategies;
-        const pageName = Object.keys(pagesCombinations[index].pages)[0];
-        const resultFromApi = await lightHouseApi(pageUrl, strategy, categories, pageName);
-
-        const currectLocation = strategies.findIndex((element) => element === strategy);
-        dataFromApi[currectLocation].push(resultFromApi);
-    }
-
-    return dataFromApi;
-};
-
-const runNow = async() => {
-    const getApiData = await callApi(categories, PagesCombinations);
-    await mailer.sendEmail(getApiData);
-};
-
 
 runNow();
 
+async function runNow() {
+    let pages;
+    try {
+        pages = require(join(process.cwd(), 'configuration/pages.json'));
+    } catch (error) {
+        error.message = `Error trying to read pages file: ${error.message}`;
+        console.error(error);
+        process.exit(1);
+    }
 
+    const strategiesCombinations = getCombinations({ strategies, categories, pages });
+    logger.info('Retrieve results from PageSpeed API.');
+    const dataFromApi = await pMap(
+        strategiesCombinations,
+        async(strategyCombinations) => await pMap(
+            strategyCombinations,
+            lightHouseApi.bind(null, lightHouseApiKey),
+            { concurrency: 2 }
+        )
+    );
+    logger.info('Send email to recipients.');
+    await sendEmail({ email, dataFromApi });
+    logger.info('Finished.');
+}

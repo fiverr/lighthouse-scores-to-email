@@ -1,0 +1,10 @@
+{
+  "host": "localbot",
+  "port": "1337",
+  "secure": true,
+  "user": "Botty McBotface",
+  "authPassword": "admin:admin",
+  "from": "Me",
+  "to": "You",
+  "subject": "Nailed it!"
+}

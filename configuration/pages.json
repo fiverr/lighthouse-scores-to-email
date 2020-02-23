@@ -1,1 +1,4 @@
-[{"Search Page" : "https://www.google.com"},{"Start Page" : "https://www.start.co.il"}]
+{
+  "Search Page" : "https://www.google.com",
+  "Start Page" : "https://www.start.co.il"
+}
