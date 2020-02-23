@@ -1,23 +1,30 @@
 {
   "name": "lighthouse-scores-to-email",
   "version": "1.0.0",
-  "description": "",
+  "description": "Send SpeedTest results to your email",
+  "author": "Fiverr SRE",
+  "license": "MIT",
+  "keywords": [
+    "sitespeed",
+    "lighthouse",
+    "report",
+    "email",
+    "performance",
+    "seo",
+    "🗼"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiverr/lighthouse-scores-to-email.git"
+  },
+  "homepage": "https://github.com/fiverr/lighthouse-scores-to-email#readme",
   "main": "index.js",
+  "bin": "bin.js",
   "scripts": {
     "start": "node index.js",
     "test": "jest",
     "lint": "eslint -c .eslintrc '**/*.js'"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fiverr/lighthouse-scores-to-email.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fiverr/lighthouse-scores-to-email/issues"
-  },
-  "homepage": "https://github.com/fiverr/lighthouse-scores-to-email#readme",
   "dependencies": {
     "handlebars-helpers": "^0.10.0",
     "node-fetch": "^2.6.0",

@@ -7,4 +7,4 @@ RUN npm i --production
 
 COPY . .
 
-CMD [ "node", "index.js" ]
+CMD [ "node", "bin.js" ]
