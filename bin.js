@@ -13,7 +13,7 @@ async function start() {
             lightHouseApiKey,
             strategies
         } = require('./configuration/config.js');
-        const pages = require(join(process.cwd(), 'configuration/pages.json'));
+        const pages = require(join(__dirname, 'configuration/pages.json'));
 
         await run({
             categories,
@@ -24,7 +24,17 @@ async function start() {
         });
 
     } catch (error) {
-        logger.error(error);
+        logger.error(JSON.stringify({
+          level: 'error',
+          time: Date.now(),
+          message: error.message,
+          stack: error.stack,
+          code: error.code,
+          context: [
+            `work dir: ${process.cwd()}`,
+            `dirname: ${__dirname}`
+          ].join('\n')
+        }));
         process.exit(1);
     }
 }
