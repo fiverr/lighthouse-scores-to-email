@@ -4,12 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width", initial-scale="1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Fiverr LightHouse Report</title>
+        <title>Fiverr PageSpeed Report</title>
     </head>
     <body>
         <table style="width: 100%; text-align: center;">
           <tr>
-            <td colspan="5"><h1 style="color: #4A73E8;">LightHouse Report - {{date}}</h1></td>
+            <td colspan="5"><h1 style="color: #4A73E8;">PageSpeed Report - {{date}}</h1></td>
           </tr>
           {{#each dataFromApi}}
             <tr>
@@ -17,7 +17,7 @@
             </tr>
            {{#each this}}
               <tr>
-                <td colspan="5" style="font-size: 1.5em; color: #404145;">{{pageName}} - {{strategy}}</td>
+                <td colspan="5" style="font-size: 1.5em; color: #404145;"><a href="{{requestedUrl}}">{{pageName}}</a> - {{strategy}}</td>
               </tr>
               <tr>
                 {{#details}}
@@ -31,6 +31,11 @@
               </tr>
             {{/each}}
           {{/each}}
+          <tr>
+            <td colspan="5" style="color:#404145;border-top:1px solid #dadbdd;padding:1em">
+              <a href="https://developers.google.com/speed/docs/insights/v5/about">Learn more about Google PageSpeed Insights</a>
+            </td>
+          </tr>
         </table>
     </body>
 </html>
