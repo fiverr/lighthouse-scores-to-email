@@ -25,17 +25,7 @@ async function start() {
         });
 
     } catch (error) {
-        logger.error(JSON.stringify({
-            level: 'error',
-            time: Date.now(),
-            message: error.message,
-            stack: error.stack,
-            code: error.code,
-            context: [
-                `work dir: ${process.cwd()}`,
-                `dirname: ${__dirname}`
-            ].join('\n')
-        }));
+        logger.error(error);
         process.exit(1);
     }
 }
