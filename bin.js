@@ -15,12 +15,20 @@ process.on('unhandledRejection', ({message, stack, code}) => console.log({
 
 async function start() {
     try {
+        let userConfig;
+        try {
+            userConfig = require(join(__dirname, 'configuration/config.json'));
+        } catch (error) {
+            // ignore, this is acceptable
+        }
+
         const {
             categories,
             email,
             lightHouseApiKey,
             strategies
-        } = config();
+        } = config(userConfig);
+
         const pages = require(join(__dirname, 'configuration/pages.json'));
 
         await run({
