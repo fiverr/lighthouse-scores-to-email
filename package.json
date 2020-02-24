@@ -1,12 +1,12 @@
 {
-  "name": "pagespeed-insights-report",
+  "name": "lighthouse-scores-to-email",
   "version": "1.0.0",
-  "description": "Send SpeedTest results to your email",
+  "description": "Send Lighthouse SpeedTest results to your email",
   "author": "Fiverr SRE",
   "license": "MIT",
   "keywords": [
-    "sitespeed",
     "lighthouse",
+    "pagespeed",
     "report",
     "email",
     "performance",

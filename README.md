@@ -1,6 +1,6 @@
-# pagespeed-insights-report
+# lighthouse-scores-to-email git[![](https://user-images.githubusercontent.com/516342/75164343-59cb6900-5729-11ea-80f1-392b57445ab2.png)](https://hub.docker.com/r/fiverr/lighthouse-scores-to-email)
 
-Get [Google PageSpeed Insights](https://developers.google.com/speed/docs/insights/v5/about) delivered to your email.
+Get [Lighthouse scoring](https://developers.google.com/web/tools/lighthouse/v3/scoring) via [Google PageSpeed Insights](https://developers.google.com/speed/docs/insights/v5/about) delivered to your email.
 
 | ![](https://user-images.githubusercontent.com/516342/75161005-bf1c5b80-5723-11ea-86c8-5946ebae25a5.png)
 | -
