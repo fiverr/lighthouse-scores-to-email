@@ -2,7 +2,7 @@
 
 Get [Lighthouse scoring](https://developers.google.com/web/tools/lighthouse/v3/scoring) via [Google PageSpeed Insights](https://developers.google.com/speed/docs/insights/v5/about) delivered to your email.
 
-| ![](https://user-images.githubusercontent.com/516342/75161005-bf1c5b80-5723-11ea-86c8-5946ebae25a5.png)
+| ![](https://user-images.githubusercontent.com/516342/75387150-8dee8780-58eb-11ea-8780-a359edabe262.png)
 | -
 
 ## Configurations
@@ -83,6 +83,7 @@ Use Gmail with Google's [app passwords](https://support.google.com/accounts/answ
 | `AUTH_USER` | `email.authUser` | Email username | __Mandatory__
 | `AUTH_PASSWORD` | `email.authPassword` | [App password](https://support.google.com/accounts/answer/185833) | __Mandatory__
 | `EMAIL_TO` | `email.to` | Recipient Email address | __Mandatory__
+| `EMAIL_FROM` | `email.from` | Sender Email address | `Lighthouse Gazette <reporter@the-lighthouse-gazette.com>`
 | `EMAIL_SUBJECT` | `email.subject` | Subject of the email | `Google LightHouse Report ✔`
 | `HOST` | `email.host` | SMTP host | `smtp.gmail.com`
 | `PORT` | `email.port` | SMTP port | `465`
