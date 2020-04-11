@@ -12,7 +12,7 @@ const fixtures = [
 const fetchTime = '2020-02-23T12:08:24.647Z';
 
 module.exports = fixtures.map(
-    ({requestedUrl, pageName, strategy}) => ({
+    ({ requestedUrl, pageName, strategy }) => ({
         requestedUrl,
         fetchTime,
         strategy,

@@ -6,7 +6,7 @@ const run = require('.');
 
 start();
 
-process.on('unhandledRejection', ({message, stack, code}) => console.log({
+process.on('unhandledRejection', ({ message, stack, code }) => console.log({
     level: 'error',
     message,
     stack,
