@@ -89,6 +89,7 @@ Use Gmail with Google's [app passwords](https://support.google.com/accounts/answ
 | `EMAIL_PORT` | `email.port` | SMTP port | `465`
 | `STATSD_HOST` | `statsd.host` | StatsD hosname | None
 | `STATSD_PORT` | `statsd.port` | StatsD port | `8125`
+| `STATSD_PREFIX` | `statsd.prefix` | Custom prefix to metric | `lighthouse_scores_to_email`
 | `SECURE` | `email.secure` | Should use SSL | `true`
 | - | `categories` | Lighthouse categories | `['performance', 'seo', 'accessibility', 'best-practices']`
 | - | `strategies` | Lighthouse strategies | `['mobile', 'desktop']`
