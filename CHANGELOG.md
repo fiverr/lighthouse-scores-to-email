@@ -2,7 +2,7 @@
 Version 2 is currently the latest version:
 ```bash
 docker run fiverr/lighthouse-scores-to-email:latest
-docker run fiverr/lighthouse-scores-to-email:2
+docker run fiverr/lighthouse-scores-to-email:2.0.0
 ```
 
 # 2.0.0
@@ -17,5 +17,5 @@ docker run fiverr/lighthouse-scores-to-email:2
 # 1.0.0
 To keep using version 1 use:
 ```bash
-docker run fiverr/lighthouse-scores-to-email:1
+docker run fiverr/lighthouse-scores-to-email:1.0.0
 ```
