@@ -80,13 +80,16 @@ Use Gmail with Google's [app passwords](https://support.google.com/accounts/answ
 | Env Variable | Config File path | Value | Example | Default
 | - | - | - | - | -
 | `APIKEY` | `lightHouseApiKey` | SpeedTest [API Key](https://developers.google.com/speed/docs/insights/v4/first-app) | __Mandatory__
-| `AUTH_USER` | `email.authUser` | Email username | __Mandatory__
-| `AUTH_PASSWORD` | `email.authPassword` | [App password](https://support.google.com/accounts/answer/185833) | __Mandatory__
-| `EMAIL_TO` | `email.to` | Recipient Email address | __Mandatory__
+| `AUTH_USER` | `email.authUser` | Email username | None
+| `AUTH_PASSWORD` | `email.authPassword` | [App password](https://support.google.com/accounts/answer/185833) | None
+| `EMAIL_TO` | `email.to` | Recipient Email address | None
 | `EMAIL_FROM` | `email.from` | Sender Email address | `Lighthouse Gazette <reporter@the-lighthouse-gazette.com>`
 | `EMAIL_SUBJECT` | `email.subject` | Subject of the email | `Google LightHouse Report ✔`
-| `HOST` | `email.host` | SMTP host | `smtp.gmail.com`
-| `PORT` | `email.port` | SMTP port | `465`
+| `EMAIL_HOST` | `email.host` | SMTP host | `smtp.gmail.com`
+| `EMAIL_PORT` | `email.port` | SMTP port | `465`
+| `STATSD_HOST` | `statsd.host` | StatsD hosname | None
+| `STATSD_PORT` | `statsd.port` | StatsD port | `8125`
+| `STATSD_PREFIX` | `statsd.prefix` | Custom prefix to metric | `lighthouse_scores_to_email`
 | `SECURE` | `email.secure` | Should use SSL | `true`
 | - | `categories` | Lighthouse categories | `['performance', 'seo', 'accessibility', 'best-practices']`
 | - | `strategies` | Lighthouse strategies | `['mobile', 'desktop']`
