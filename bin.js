@@ -26,7 +26,8 @@ async function start() {
             categories,
             email,
             lightHouseApiKey,
-            strategies
+            strategies,
+            statsdClient
         } = config(userConfig);
 
         const pages = require(join(__dirname, 'configuration/pages.json'));
@@ -36,7 +37,8 @@ async function start() {
             email,
             lightHouseApiKey,
             pages,
-            strategies
+            strategies,
+            statsdClient
         });
 
     } catch (error) {
