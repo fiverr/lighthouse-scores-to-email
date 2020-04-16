@@ -50,21 +50,23 @@ docker pull fiverr/lighthouse-scores-to-email:latest
 
 Export your variables to the environment and pass them through alongside your pages.json file
 ```
-docker run fiverr/lighthouse-scores-to-email:latest \
+docker run \
   -v "$(pwd)"/pages.json:/usr/src/app/configuration/pages.json \
+  -e APIKEY \
   -e AUTH_USER \
   -e AUTH_PASSWORD \
   -e EMAIL_TO \
-  -e APIKEY \
-  --name crazy-speedtest
+  -e STATSD_HOST \
+  -e STATSD_PORT \
+  fiverr/lighthouse-scores-to-email:latest
 ```
 
 Or send as config file
 ```
-docker run fiverr/lighthouse-scores-to-email:latest \
+docker run \
   -v "$(pwd)"/pages.json:/usr/src/app/configuration/pages.json \
-  -v "$(pwd)"/pages.json:/usr/src/app/configuration/config.json \
-  --name crazy-speedtest
+  -v "$(pwd)"/config.json:/usr/src/app/configuration/config.json \
+  fiverr/lighthouse-scores-to-email:latest
 ```
 
 ## Get your credentials here
@@ -78,7 +80,7 @@ Use Gmail with Google's [app passwords](https://support.google.com/accounts/answ
 ## Set up environment variables or configuration using config file
 
 | Env Variable | Config File path | Value | Default
-| - | - | - | - | -
+| - | - | - | -
 | `APIKEY` | `lightHouseApiKey` | SpeedTest [API Key](https://developers.google.com/speed/docs/insights/v4/first-app) | __Mandatory__
 | `AUTH_USER` | `email.authUser` | Email username | None
 | `AUTH_PASSWORD` | `email.authPassword` | [App password](https://support.google.com/accounts/answer/185833) | None
