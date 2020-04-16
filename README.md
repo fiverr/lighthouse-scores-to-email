@@ -17,7 +17,7 @@ Add pages configurations to `/configuration/pages.json`
 > #### configuration/pages.json
 > ```json
 > {
->   "Search Page" : "https://www.google.com",
+>   "Example": "https://example.net/",
 >   "Start Page" : "https://www.start.co.il"
 > }
 > ```
@@ -29,7 +29,7 @@ Add pages configurations to `/configuration/pages.json`
 >   "email": {
 >    "to": "t-800@google.com",
 >    "authUser": "admin@skynet.net",
->  "authPassword": "<INSERT_GOOGLE_APP_PASSWORD_HERE>"
+>    "authPassword": "<INSERT_GOOGLE_APP_PASSWORD_HERE>"
 >  },
 >  "lightHouseApiKey": "<INSERT_PAGESPEED_API_KEY_HERE>"
 >}
