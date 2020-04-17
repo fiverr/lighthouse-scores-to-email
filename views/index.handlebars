@@ -12,6 +12,9 @@
                 <td colspan="5">
                     <h1 style="color: #4A73E8;">Lighthouse Report - {{date}}</h1>
                     <p style="margin-top: -5px; font-size: 1em; padding-bottom: 20px; color: #62646A;">Please note that the <b>Performance</b> score should be considered an approximation and that 2-3 point swings in either direction is completely normal.</p>
+                    {{#if emailGenericLinkTo}}
+                        <a colspan="5" style="font-size: 1.5em; color: #404145;" href={{emailGenericLinkTo}}>{{emailGenericLinkToText}}</a>
+                    {{/if}}
                 </td>
             </tr>
         {{#each dataFromApi}}
