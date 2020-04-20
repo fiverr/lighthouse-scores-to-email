@@ -89,11 +89,29 @@ Use Gmail with Google's [app passwords](https://support.google.com/accounts/answ
 | `EMAIL_SUBJECT` | `email.subject` | Subject of the email | `Google LightHouse Report ✔`
 | `EMAIL_HOST` | `email.host` | SMTP host | `smtp.gmail.com`
 | `EMAIL_PORT` | `email.port` | SMTP port | `465`
-| `EMAIL_GENERIC_LINK_TO` | `email.emailGenericLinkTo` | Generic Link in the email (can be used to link to graphs) | None
-| `EMAIL_GENERIC_LINK_TO_TEXT` | `email.emailGenericLinkToText` | Text for the Generic Link in the email | None
 | `STATSD_HOST` | `statsd.host` | StatsD hosname | None
 | `STATSD_PORT` | `statsd.port` | StatsD port | `8125`
 | `STATSD_PREFIX` | `statsd.prefix` | Custom prefix to metric | `lighthouse_scores_to_email`
 | `SECURE` | `email.secure` | Should use SSL | `true`
 | - | `categories` | Lighthouse categories | `['performance', 'seo', 'accessibility', 'best-practices']`
 | - | `strategies` | Lighthouse strategies | `['mobile', 'desktop']`
+
+## Add links to your email (for example, links for grafana)
+
+> #### configuration/config.json
+> ```json
+> {
+    "email": {
+        "list": [
+            {
+                "text": "Email provided by Fiverr SRE team",
+                "url": "https://play.grafana.org/"
+            },
+            {
+                "text": "View trends on Grafana dashborad",
+                "url": "https://play.grafana.org/"
+            }
+        ]
+    }
+}
+>```
