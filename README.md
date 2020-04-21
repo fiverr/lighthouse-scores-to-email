@@ -95,3 +95,23 @@ Use Gmail with Google's [app passwords](https://support.google.com/accounts/answ
 | `SECURE` | `email.secure` | Should use SSL | `true`
 | - | `categories` | Lighthouse categories | `['performance', 'seo', 'accessibility', 'best-practices']`
 | - | `strategies` | Lighthouse strategies | `['mobile', 'desktop']`
+
+## Add links to your email (for example, links for grafana)
+
+> #### configuration/config.json
+> ```json
+> {
+    "email": {
+        "list": [
+            {
+                "text": "Email provided by Fiverr SRE team",
+                "url": "https://play.grafana.org/"
+            },
+            {
+                "text": "View trends on Grafana dashborad",
+                "url": "https://play.grafana.org/"
+            }
+        ]
+    }
+}
+>```
