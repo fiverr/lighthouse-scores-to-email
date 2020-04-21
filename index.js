@@ -18,6 +18,11 @@ module.exports = async function run({
         return;
     }
     const strategiesCombinations = getCombinations({ strategies, categories, pages });
+    if (strategiesCombinations.flat().length === 0) {
+        logger.warn('No pages specified. Exit program.');
+        return;
+    }
+
     logger.debug('Retrieve results from PageSpeed API.');
     const dataFromApi = await pMap(
         strategiesCombinations,
