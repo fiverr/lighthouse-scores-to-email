@@ -50,10 +50,9 @@ module.exports = async function run({
     if (statsdClient.host) {
         logger.debug('Send metrics to statsd.');
         try {
-            const result = await sendMetrics.send({ statsdClient, dataFromApi });
+            const { length } = await sendMetrics.send({ statsdClient, dataFromApi });
             logger.info({
-                message: 'Metrics were sent successfully',
-                response: JSON.stringify(result)
+                message: `${length} metrics were sent successfully.`
             });
         } catch (error) {
             logger.error(error);
