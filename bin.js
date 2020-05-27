@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const { join } = require('path');
+const wait = require('@lets/wait');
 const logger = require('./lib/logger');
 const config = require('./lib/config');
 const run = require('.');
@@ -43,6 +44,8 @@ async function start() {
             strategies,
             statsdClient
         });
+
+        await wait(2000);
 
     } catch (error) {
         logger.error(error);

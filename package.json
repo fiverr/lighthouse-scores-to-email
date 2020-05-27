@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@fiverr/statsd-client": "^1.0.3",
+    "@lets/wait": "^1.0.0",
     "handlebars-helpers": "^0.10.0",
     "levelheaded": "^1.2.0",
     "node-fetch": "^2.6.0",
