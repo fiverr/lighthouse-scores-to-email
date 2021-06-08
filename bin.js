@@ -16,7 +16,6 @@ process.on('unhandledRejection', ({ message, stack, code }) => console.log({
 
 process.on('exit', (code) => logger.info(`About to exit with code ${code}`));
 
-
 async function start() {
     try {
         let userConfig;

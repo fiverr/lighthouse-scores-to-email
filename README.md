@@ -101,17 +101,17 @@ Use Gmail with Google's [app passwords](https://support.google.com/accounts/answ
 > #### configuration/config.json
 > ```json
 > {
-    "email": {
-        "list": [
-            {
-                "text": "Email provided by Fiverr SRE team",
-                "url": "https://play.grafana.org/"
-            },
-            {
-                "text": "View trends on Grafana dashborad",
-                "url": "https://play.grafana.org/"
-            }
-        ]
-    }
-}
+>     "email": {
+>         "list": [
+>             {
+>                 "text": "Email provided by Fiverr SRE team",
+>                 "url": "https://play.grafana.org/"
+>             },
+>             {
+>                 "text": "View trends on Grafana dashborad",
+>                 "url": "https://play.grafana.org/"
+>             }
+>         ]
+>     }
+> }
 >```
