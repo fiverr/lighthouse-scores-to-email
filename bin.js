@@ -7,11 +7,12 @@ const run = require('.');
 
 start();
 
-process.on('unhandledRejection', ({ message, stack, code }) => console.log({
+process.on('unhandledRejection', ({ message, stack, code, response }) => console.log({
     level: 'error',
     message,
     stack,
-    code
+    code,
+    response
 }));
 
 process.on('exit', (code) => logger.info(`About to exit with code ${code}`));
