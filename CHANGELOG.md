@@ -1,3 +1,8 @@
+# 2.0.1
+
+- Add request URL to error log
+- Update to node 14
+
 # latest
 Version 2 is currently the latest version:
 ```bash

@@ -1,26 +1,22 @@
-defaults: &defaults
-  working_directory: ~/app
-  docker:
-    - image: node:12
-
-version: 2
-jobs:
-  test:
-    <<: *defaults
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm i
-      - run:
-          name: Test
-          command: npm t
-      - run:
-          name: Code lint
-          command: npm run lint
-
+version: 2.1
 workflows:
-  version: 2
   ci-cd:
     jobs:
-      - test
+      - publish:
+          context: org-global
+jobs:
+  publish:
+    working_directory: ~/app
+    docker:
+      - image: node:14
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm t
+      - run: npm run lint
+      - run:
+          name: Set npmrc credentials
+          command: echo -e $NPMRC > ~/.npmrc
+      - run:
+          name: Publish to NPM
+          command: npm_config_yes=true npx published --git-tag

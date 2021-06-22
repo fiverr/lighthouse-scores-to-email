@@ -9,12 +9,13 @@ start();
 
 process.on(
     'unhandledRejection',
-    ({ message, stack, code, response }) => console.log(
+    ({ message, stack, code, request, response }) => console.log(
         JSON.stringify({
             level: 'error',
             message,
             stack,
             code,
+            request,
             response
         })
     )
