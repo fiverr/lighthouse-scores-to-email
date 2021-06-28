@@ -93,8 +93,8 @@ Use Gmail with Google's [app passwords](https://support.google.com/accounts/answ
 | `STATSD_PORT` | `statsd.port` | StatsD port | `8125`
 | `STATSD_PREFIX` | `statsd.prefix` | Custom prefix to metric | `lighthouse_scores_to_email`
 | `SECURE` | `email.secure` | Should use SSL | `true`
-| - | `categories` | Lighthouse categories | `['performance', 'seo', 'accessibility', 'best-practices']`
-| - | `strategies` | Lighthouse strategies | `['mobile', 'desktop']`
+| - | `categories` | [Lighthouse categories](https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed#category) | `['PERFORMANCE', 'SEO', 'ACCESSIBILITY', 'BEST_PRACTICES']`
+| - | `strategies` | [Lighthouse strategies](https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed#category) | `['MOBILE', 'DESKTOP']`
 
 ## Add links to your email (for example, links for grafana)
 

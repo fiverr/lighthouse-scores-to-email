@@ -10,8 +10,8 @@ const sendMetrics = require('./lib/sendMetrics');
  * @returns {object}
  */
 module.exports = async function run({
-    categories = ['performance', 'seo', 'accessibility', 'best-practices'],
-    strategies = ['mobile', 'desktop'],
+    categories = ['PERFORMANCE', 'SEO', 'ACCESSIBILITY', 'BEST_PRACTICES'],
+    strategies = ['MOBILE', 'DESKTOP'],
     email = {},
     lightHouseApiKey,
     pages = {},
