@@ -1,3 +1,8 @@
+# 2.0.2
+
+- Add request URL to error log
+- Update to node 16
+
 # 2.0.1
 
 - Add request URL to error log

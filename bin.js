@@ -3,34 +3,16 @@ const { join } = require('path');
 const wait = require('@lets/wait');
 const logger = require('./lib/logger');
 const config = require('./lib/config');
+const softRequire = require('./lib/softRequire');
 const run = require('.');
+
+const CONFIGURATION_FILE_PATH = join(__dirname, 'configuration/config.json');
 
 start();
 
-process.on(
-    'unhandledRejection',
-    ({ message, stack, code, request, response }) => console.log(
-        JSON.stringify({
-            level: 'error',
-            message,
-            stack,
-            code,
-            request,
-            response
-        })
-    )
-);
-
-process.on(
-    'exit',
-    (code) => logger.info(
-        `About to exit with code ${code}`
-    )
-);
-
 async function start() {
     try {
-        const userConfig = loadUserConfig();
+        const userConfig = softRequire(CONFIGURATION_FILE_PATH);
 
         const {
             categories,
@@ -63,21 +45,5 @@ async function start() {
         process.exit(1);
     } finally {
         process.exit();
-    }
-}
-
-/**
- * Load configuration file if it exists
- */
-function loadUserConfig() {
-    try {
-        return require(
-            join(
-                __dirname,
-                'configuration/config.json'
-            )
-        );
-    } catch (error) {
-        return undefined;
     }
 }
