@@ -26,14 +26,24 @@ module.exports = async function run({
 
     logger.debug('Retrieve results from PageSpeed API.');
     try {
-        const dataFromApi = await pMap(
+        const errors = [];
+
+        const results = await pMap(
             strategiesCombinations,
             async(strategyCombinations) => await pMap(
                 strategyCombinations,
-                lightHouseApi.bind(null, lightHouseApiKey),
+                async (combination) => {
+                    try {
+                        return await lightHouseApi(lightHouseApiKey, combination);
+                    } catch (error) {
+                        return undefined;
+                    }
+                },
                 { concurrency: 2 }
             )
         );
+
+        const dataFromApi = results.map((page) => page.filter(Boolean));
 
         if (email.to) {
             logger.debug('Send email to recipients.');
@@ -60,6 +70,20 @@ module.exports = async function run({
                 logger.error(error);
             }
         }
+
+        errors.length && logger.error({
+            message: `Failed with ${errors.length} errors`,
+            description: JSON.stringify(
+                errors.map(
+                    (error) => ({
+                        message: error.message,
+                        stack: error.stack,
+                        name: error.constructor?.name,
+                        ...error
+                    })
+                )
+            )
+        });
 
         return dataFromApi;
     } catch (error) {
