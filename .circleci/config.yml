@@ -22,6 +22,7 @@ workflows:
               only:
                 - master
                 - /.*_rc/
+                - tt
 jobs:
   publish:
     working_directory: ~/app
