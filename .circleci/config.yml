@@ -13,6 +13,7 @@ workflows:
                 only:
                   - master
                   - /.*_rc/
+                  - cd_automation
       - deploy:
           context: org-global
           requires:
@@ -22,7 +23,7 @@ workflows:
               only:
                 - master
                 - /.*_rc/
-                - tt
+                - cd_automation
 jobs:
   publish:
     working_directory: ~/app
