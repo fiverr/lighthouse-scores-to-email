@@ -4,6 +4,23 @@ workflows:
     jobs:
       - publish:
           context: org-global
+      - docker_release:
+            context: org-global
+            requires:
+              - publish
+            filters:
+              branches:
+                only:
+                  - master
+                  - /.*_rc/
+      - deploy:
+          context: org-global
+          requires:
+            - docker_release
+          filters:
+            branches:
+              only:
+                - master
 jobs:
   publish:
     working_directory: ~/app
@@ -20,3 +37,54 @@ jobs:
       - run:
           name: Publish to NPM
           command: npm_config_yes=true npx published --git-tag
+  docker_release:
+    working_directory: ~/app
+    resource_class: small
+    docker:
+      - image: ${DOCKER_SOURCE}fiverr/circleci_python_3_buster:latest
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASS
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Prepare docker version
+          command: |
+              jq -r ".version" package.json  > .version
+              /var/tmp/kubernetes/scripts/ci/create_version_name.sh
+      - run:
+          name: Docker build
+          command: /var/tmp/kubernetes/scripts/ci/build_version.sh
+      - run:
+          name: Docker push
+          command: /var/tmp/kubernetes/scripts/ci/push_version.sh
+  deploy:
+      working_directory: ~/app
+      docker:
+        - image: ${DOCKER_SOURCE}fiverr/circleci_python_3_buster:latest
+          auth:
+            username: $DOCKER_USER
+            password: $DOCKER_PASS
+      steps:
+        - checkout
+        - run:
+            name: Prepare docker version
+            command: |
+                jq -r ".version" package.json  > .version
+                /var/tmp/kubernetes/scripts/ci/create_version_name.sh
+        -  run:
+            name: Deploy version
+            command: |
+              export COMMENT="$(echo $(git log -n 1 --format=oneline | grep -o ' .\+'). by ${CIRCLE_USERNAME} | jq -aR .)"
+              curl -o output.txt --user ${CIRCLECI_API_TOKEN}: \
+                --header "Content-Type: application/json" \
+                --data "{\"branch\":\"master\", \"parameters\":{\"version\":\"$(cat .docker_tag)\", \"image\":\"${CIRCLE_PROJECT_REPONAME}\", \"username\":\"${CIRCLE_USERNAME}\", \"comment\":${COMMENT}}}" \
+                --request POST \
+                https://circleci.com/api/v2/project/github/fiverr/sre_jobs/pipeline
+
+              cat output.txt
+              grep -q pending output.txt
+
