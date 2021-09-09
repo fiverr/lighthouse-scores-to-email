@@ -16,7 +16,7 @@ workflows:
       - deploy:
           context: org-global
           requires:
-            - release
+            - docker_release
           filters:
             branches:
               only:
