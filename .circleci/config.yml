@@ -1,18 +1,24 @@
-version: 2.1
+version: '2.1'
 workflows:
   ci-cd:
     jobs:
       - publish:
           context: org-global
+          pre-steps:
+            - aws-configure-with-oidc/assume-role:
+                role-arn: IAM_ROLE_PROD
       - docker_release:
-            context: org-global
-            requires:
-              - publish
-            filters:
-              branches:
-                only:
-                  - master
-                  - /.*_rc/
+          context: org-global
+          requires:
+            - publish
+          filters:
+            branches:
+              only:
+                - master
+                - /.*_rc/
+          pre-steps:
+            - aws-configure-with-oidc/assume-role:
+                role-arn: IAM_ROLE_PROD
       - deploy:
           context: org-global
           requires:
@@ -21,6 +27,9 @@ workflows:
             branches:
               only:
                 - master
+          pre-steps:
+            - aws-configure-with-oidc/assume-role:
+                role-arn: IAM_ROLE_PROD
 jobs:
   publish:
     working_directory: ~/app
@@ -53,8 +62,8 @@ jobs:
       - run:
           name: Prepare docker version
           command: |
-              jq -r ".version" package.json  > .version
-              /var/tmp/kubernetes/scripts/ci/create_version_name.sh
+            jq -r ".version" package.json  > .version
+            /var/tmp/kubernetes/scripts/ci/create_version_name.sh
       - run:
           name: Docker build
           command: /var/tmp/kubernetes/scripts/ci/build_version.sh
@@ -62,29 +71,31 @@ jobs:
           name: Docker push
           command: /var/tmp/kubernetes/scripts/ci/push_version.sh
   deploy:
-      working_directory: ~/app
-      docker:
-        - image: ${DOCKER_SOURCE}fiverr/circleci_python_3_buster:latest
-          auth:
-            username: $DOCKER_USER
-            password: $DOCKER_PASS
-      steps:
-        - checkout
-        - run:
-            name: Prepare docker version
-            command: |
-                jq -r ".version" package.json  > .version
-                /var/tmp/kubernetes/scripts/ci/create_version_name.sh
-        -  run:
-            name: Deploy version
-            command: |
-              export COMMENT="$(echo $(git log -n 1 --format=oneline | grep -o ' .\+'). by ${CIRCLE_USERNAME} | jq -aR .)"
-              curl -o output.txt --user ${CIRCLECI_API_TOKEN}: \
-                --header "Content-Type: application/json" \
-                --data "{\"branch\":\"master\", \"parameters\":{\"version\":\"$(cat .docker_tag)\", \"image\":\"${CIRCLE_PROJECT_REPONAME}\", \"username\":\"${CIRCLE_USERNAME}\", \"comment\":${COMMENT}}}" \
-                --request POST \
-                https://circleci.com/api/v2/project/github/fiverr/sre_jobs/pipeline
+    working_directory: ~/app
+    docker:
+      - image: ${DOCKER_SOURCE}fiverr/circleci_python_3_buster:latest
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASS
+    steps:
+      - checkout
+      - run:
+          name: Prepare docker version
+          command: |
+            jq -r ".version" package.json  > .version
+            /var/tmp/kubernetes/scripts/ci/create_version_name.sh
+      - run:
+          name: Deploy version
+          command: |
+            export COMMENT="$(echo $(git log -n 1 --format=oneline | grep -o ' .\+'). by ${CIRCLE_USERNAME} | jq -aR .)"
+            curl -o output.txt --user ${CIRCLECI_API_TOKEN}: \
+              --header "Content-Type: application/json" \
+              --data "{\"branch\":\"master\", \"parameters\":{\"version\":\"$(cat .docker_tag)\", \"image\":\"${CIRCLE_PROJECT_REPONAME}\", \"username\":\"${CIRCLE_USERNAME}\", \"comment\":${COMMENT}}}" \
+              --request POST \
+              https://circleci.com/api/v2/project/github/fiverr/sre_jobs/pipeline
 
-              cat output.txt
-              grep -q pending output.txt
+            cat output.txt
+            grep -q pending output.txt
 
+orbs:
+  aws-configure-with-oidc: l060ki/aws-configure-with-oidc@0.1.2
