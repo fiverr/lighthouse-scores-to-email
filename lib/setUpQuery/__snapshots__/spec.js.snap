@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`setUpQuery should assemble URL with parameters in query string 1`] = `"https://pagespeedonline.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fwww.website.com%2Fpage%3Fkey%3Dbalue&strategy=mobile&key=Aa123&category=performance&category=seo"`;
+exports[`setUpQuery should assemble URL with parameters in query string 1`] = `"https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fwww.website.com%2Fpage%3Fkey%3Dbalue&strategy=mobile&key=Aa123&category=performance&category=seo"`;

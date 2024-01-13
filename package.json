@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-scores",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Send Lighthouse SpeedTest results to your email",
   "author": "Fiverr SRE",
   "license": "MIT",

@@ -1,3 +1,7 @@
+# 2.0.3
+
+- Update pagespeedonline API URL
+
 # 2.0.2
 
 - Add request URL to error log
